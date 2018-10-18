@@ -31,6 +31,7 @@ public class Question6 {
 	 for(int i=1;i<numServerst;i++){
 		 if(Server==i){
 		 }else if(Server==targetServert){
+			 break;
 		 }else if((minTime[Server]+timeso[Server][i])<=minTime[i]){
 			 minTime[i] = minTime[Server]+timeso[Server][i];
 			 Question6.recursive(i);
