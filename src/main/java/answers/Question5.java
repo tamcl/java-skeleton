@@ -47,10 +47,9 @@ public class Question5 {
 					current-=sort[i];
 					count++;
 					break;
-				}else if(current<sort[i]&&i!=-1){
-					
-				}else(current<sort[0]){
-					current = -1;
+				}else if(current<sort[0]){
+					current=-1;
+				}else{
 				}
 			}
 		}
