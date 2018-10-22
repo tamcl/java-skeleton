@@ -26,6 +26,7 @@ public class Question5 {
 			sort[i]=count;
 		}
 		count=0;
+		output=0;
 		while(current>0){
 			for(int i =length-1;i<0;i--){
 				if(current>sort[i]){
@@ -33,6 +34,7 @@ public class Question5 {
 						output = current/sort[i];
 					}else{
 						current-=sort[i];
+						output--;
 						break;	
 					}
 				}
