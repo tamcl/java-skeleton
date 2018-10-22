@@ -78,7 +78,7 @@ public class Question2 {
 					if(InComb[i][n][cashflowIn.length-1]>=cashflowIn.length){
 						check=false;
 					}
-					for(int t=0;t<cashflowIn.length;t++){
+					for(int t=0;t<cashflowIn.length-1;t++){
 						if(InComb[i][n][t]<InComb[i][n][t+1]){
 							check = false;
 						}
