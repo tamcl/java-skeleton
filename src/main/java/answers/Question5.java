@@ -31,7 +31,7 @@ public class Question5 {
 			for(int i =length-1;i<0;i--){
 				if(current>sort[i]){
 					if(current%sort[i]==0){
-						output = current/sort[i];
+						output += current/sort[i];
 						break;
 					}else{
 						current-=sort[i];
