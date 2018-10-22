@@ -47,12 +47,14 @@ public class Question5 {
 					current-=sort[i];
 					count++;
 					break;
-				}else{
+				}else if(current<sort[i]&&i!=-1){
+					
+				}else(current<sort[0]){
 					current = -1;
 				}
 			}
 		}
-		if(count<output){
+		if(count<output&&current!=-1){
 			output=count;
 		}
 		return output;
