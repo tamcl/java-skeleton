@@ -35,7 +35,7 @@ public class Question5 {
 						break;
 					}else{
 						current-=sort[i];
-						output--;
+						output++;
 						break;	
 					}
 				}
