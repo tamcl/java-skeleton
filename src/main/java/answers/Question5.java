@@ -32,6 +32,7 @@ public class Question5 {
 				if(current>sort[i]){
 					if(current%sort[i]==0){
 						output = current/sort[i];
+						break;
 					}else{
 						current-=sort[i];
 						output--;
