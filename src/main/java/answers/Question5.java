@@ -9,17 +9,23 @@ public class Question5 {
 		int length = allowedAllocations.length;
 		int[] sort = new int[allowedAllocations.length];
 		int count=allowedAllocations[0];
+		int max=0;
 		for(int i =0; i< length; i++){
 			if(allowedAllocations[i]<count){
 				count=allowedAllocations[i];
 			}
+			if(allowedAllocations[i]>max){
+				max=allowedAllocations[i];
+			}
 		}
 		sort[0]= count;
-		count=totalValue+1;
+		sort[length-1]=max;
+		
 		//sort out order
-		for(int i =1; i< length; i++){
+		for(int i =1; i< length-2; i++){
+			count=max+1;
 			for(int c=0;c<length;c++){
-				if(sort[i]<allowedAllocations[c]&&allowedAllocations[c]<count){
+				if(sort[i-1]<allowedAllocations[c]&&allowedAllocations[c]<count){
 					count = allowedAllocations[c];
 				}
 			}
@@ -41,22 +47,7 @@ public class Question5 {
 				}
 			}
 		}
-		current=totalValue;
-		while(current>0){
-			for(int i=length-1;i<0;i--){
-				if(current>sort[i]){
-					current-=sort[i];
-					count++;
-					break;
-				}else if(current<sort[0]){
-					current=-1;
-				}else{
-				}
-			}
-		}
-		if(count<output&&current!=-1){
-			output=count;
-		}
+	
 		return output;
 	}
 
