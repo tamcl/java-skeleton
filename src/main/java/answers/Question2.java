@@ -51,8 +51,7 @@ public class Question2 {
 				for(int c=0; c<cashflowOut.length;c++)
 				OutComb[i][n][c]=cashflowOut.length;
 			}
-		}
-		
+		}	
 		for(int i=0;i<cashflowIn.length;i++){
 			for(int c=0;c<i+1;c++){
 				InComb[i][0][c]=c;
@@ -63,80 +62,72 @@ public class Question2 {
 				OutComb[i][0][c]=c;
 			}
 		}
-		
 		//in
-		for(int i=0;i<cashflowIn.length;i++){
-			for(int n=1;n<combinations(cashflowIn.length,i+1)-1;n++){
-				for(int c=0;c<cashflowIn.length;c++){
+		for(int n=0;n<combinations(cashflowIn.length,1);n++){
+			InComb[0][n][0]=n;
+		}
+		for(int i=1;i<cashflowIn.length;i++){
+			for(int n=1;n<combinations(cashflowIn.length,i+1);n++){
+				for(int c=0;c<i+1;c++){
 					InComb[i][n][c]=InComb[i][n-1][c];
 				}
-				InComb[i][n][cashflowIn.length-1]+=1;
-				boolean check = false;
-				int ct =0;
-				while(check==false){
-					check = true;
-					if(InComb[i][n][cashflowIn.length-1]>=cashflowIn.length){
-						check=false;
-					}
-					for(int t=0;t<cashflowIn.length-1;t++){
-						if(InComb[i][n][t]<InComb[i][n][t+1]){
-							check = false;
+				
+				InComb[i][n][i]=InComb[i][n][i]+1;
+				
+				if(InComb[i][n][i]>=cashflowIn.length){
+					int ct=0;
+					InComb[i][n][i]=InComb[i][n][i]-1;
+					for(int t=i;t>=1;t--){
+						if(InComb[i][n][t]-InComb[i][n][t-1]>1){
+							ct=t-1;
+							break;
 						}
 					}
-					//reconstruct
-					for(int t=cashflowIn.length-2;t>=0;t--){
-						if(InComb[i][n][t+1]-InComb[i][n][t]==1){
-							ct=t;
+					InComb[i][n][ct]=InComb[i][n][ct]+1;
+					for(int t=ct+1;t<=i;t++){
+						InComb[i][n][t]=InComb[i][n][t-1]+1;
+					}
+				}
+			}
+		}
+
+				
+
+		//out
+		for(int n=0;n<combinations(cashflowOut.length,1);n++){
+			OutComb[0][n][0]=n;
+		}
+		for(int i=1;i<cashflowOut.length;i++){
+			for(int n=1;n<combinations(cashflowOut.length,i+1);n++){
+				for(int c=0;c<i+1;c++){
+					OutComb[i][n][c]=OutComb[i][n-1][c];
+				}
+				
+				OutComb[i][n][i]=OutComb[i][n][i]+1;
+				
+				if(OutComb[i][n][i]>=cashflowOut.length){
+					int ct=0;
+					OutComb[i][n][i]=OutComb[i][n][i]-1;
+					for(int t=i;t>=1;t--){
+						if(OutComb[i][n][t]-OutComb[i][n][t-1]>1){
+							ct=t-1;
+							break;
 						}
 					}
-					InComb[i][n][ct]+=1;
-					int temp = InComb[i][n][ct]+1;
-					for(int t=ct+1;t<cashflowIn.length;t++){
-						InComb[i][n][t]= temp;
-						temp++;
+					OutComb[i][n][ct]=OutComb[i][n][ct]+1;
+					for(int t=ct+1;t<=i;t++){
+						OutComb[i][n][t]=OutComb[i][n][t-1]+1;
 					}
 				}
 			}
 		}
 		
-		//out
-		for(int i=0;i<cashflowOut.length;i++){
-			for(int n=1;n<combinations(cashflowOut.length,i+1)-1;n++){
-				for(int c=0;c<cashflowOut.length;c++){
-					OutComb[i][n][c]=OutComb[i][n-1][c];
-				}
-				OutComb[i][n][cashflowOut.length-1]+=1;
-				boolean check = false;
-				int ct =0;
-				while(check==false){
-					check = true;
-					if(OutComb[i][n][cashflowOut.length-1]>=cashflowOut.length){
-						check=false;
-					}
-					for(int t=0;t<cashflowOut.length;t++){
-						if(OutComb[i][n][t]<OutComb[i][n][t+1]){
-							check = false;
-						}
-					}
-					//reconstruct
-					for(int t=cashflowOut.length-2;t>=0;t--){
-						if(OutComb[i][n][t+1]-OutComb[i][n][t]==1){
-							ct=t;
-						}
-					}
-					OutComb[i][n][ct]+=1;
-					int temp = OutComb[i][n][ct]+1;
-					for(int t=ct+1;t<cashflowOut.length;t++){
-						OutComb[i][n][t]= temp;
-						temp++;
-					}
-				}
-			}
-		}
+		
+		
 		int ctt = 0;
 		for(int i=0;i<cashflowIn.length;i++){
 			for(int n=0;n<combinations(cashflowIn.length,i+1);n++){
-				for(int c=0;c<cashflowIn.length;c++){
+				for(int c=0;c<i+1;c++){
 					In[ctt]+=cashflowIn[InComb[i][n][c]];
 				}
 				ctt++;
@@ -146,24 +137,24 @@ public class Question2 {
 		ctt = 0;
 		for(int i=0;i<cashflowOut.length;i++){
 			for(int n=0;n<combinations(cashflowOut.length,i+1);n++){
-				for(int c=0;c<cashflowOut.length;c++){
+				for(int c=0;c<i+1;c++){
 					Out[ctt]+=cashflowOut[OutComb[i][n][c]];
 				}
 				ctt++;
 			}
 		}
 		
-		for(int i=0;i<combinationsSum(cashflowIn.length);i++){
+		for(int i=0;i<In.length;i++){
 			for(int c=0; c<combinationsSum(cashflowOut.length);c++){
-				if(In[i]-Out[i]>=0){
-					output=In[i]-Out[i];
+				if(In[i]-Out[c]>=0){
+					output=In[i]-Out[c];
 				}
 			}
 		}
-		for(int i=0;i<combinationsSum(cashflowIn.length);i++){
-			for(int c=0; c<combinationsSum(cashflowOut.length);c++){
-				if(In[i]-Out[i]<output){
-					output=In[i]-Out[i];
+		for(int i=0;i<In.length;i++){
+			for(int c=0; c<Out.length;c++){
+				if(In[i]-Out[c]<output&&In[i]-Out[c]>=0){
+					output=In[i]-Out[c];
 				}
 			}
 		}
@@ -174,13 +165,7 @@ public class Question2 {
 		
 		
 		
-		
-		//calculate the possible combination
-		/*while(combinationsSum(cashflowIn.length)>count){
-			int slot=
-			In[count]=
-			count++;
-		}*/
+
 		
 		return output;
 	}
