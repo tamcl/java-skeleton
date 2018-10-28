@@ -1,4 +1,4 @@
-package answers;
+//package answers;
 
 public class Question5 {
 
@@ -35,7 +35,7 @@ public class Question5 {
 		output=0;
 		while(current>0){
 			for(int i =length-1;i>=0;i--){
-				if(current>sort[i]){
+				if(current>=sort[i]){
 					if(current%sort[i]==0){
 						output += current/sort[i];
 						current=0;
