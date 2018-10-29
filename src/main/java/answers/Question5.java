@@ -1,4 +1,4 @@
-//package answers;
+package answers;
 
 public class Question5 {
 
